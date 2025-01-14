@@ -1,10 +1,73 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Welcome from "../components/Welcome.astro";
+import Menu from "../layouts/Menu.astro";
+import Components from "../layouts/Components.astro";
+const { title } = Astro.props;
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-</Layout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Document</title>
+  </head>
+  <body>
+    <Menu />
+    <div class="circle-blue"></div>
+    <div class="circle-yellow"></div>
+    <div class="circle-rose"></div>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-light-index: #f4f1f5;
+  }
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-light-index--);
+  }
+  .menu {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background-color: #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu-item {
+    margin: 5px 0;
+    cursor: pointer;
+  }
+
+  .hr {
+    background-color: #ffffff;
+    height: 1px;
+    border: none;
+  }
+
+  .container-circle:hover .menu {
+    display: block;
+  }
+
+  .circle-blue {
+    width: 862px;
+    height: 851px;
+    background: radial-gradient(
+      circle,
+      #d0eefe 0%,
+      var(--color-light-index) 100%
+    );
+    border-radius: 50%;
+    top: -120px;
+    left: 598px;
+  }
+</style>
