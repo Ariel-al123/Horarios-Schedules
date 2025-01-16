@@ -1,5 +1,6 @@
 ---
 import Components from "./Components.astro";
+const  PlusIcon = "../assets/plus.svg";
 ---
 
 <html lang="en">
@@ -9,40 +10,17 @@ import Components from "./Components.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Horario-Scheduler</title>
   </head>
-
   <div class="contenedor-menu">
     <div class="container-circle">
       <div class="menu">
-        <!-- <Components
-          icon={(
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="icon icon-tabler icon-tabler-plus"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M12 5l0 14"></path>
-              <path d="M5 12l14 0"></path>
-            </svg>
-          )}>Home</Components
-        >
-        -->
-        <Components icon="⚙️">Settings</Components>
+        <Components icon={(PlusIcon)}>Home</Components>
+        <Components icon={(PlusIcon)}>Settings</Components>
         <Components icon="❓">Help</Components>
       </div>
     </div>
   </div>
 
   <style>
- 
-
     .contenedor-menu {
       width: 4%;
       height: 450px;
@@ -51,9 +29,8 @@ import Components from "./Components.astro";
       float: right;
       border-radius: 15px;
       margin: 2%;
-      -webkit-box-shadow: 1px 5px 6px 0px rgba(059, 59, 59, 0.75);
--moz-box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
-box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);    }
+      box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
+    }
 
     .container-circle {
       position: relative;
@@ -70,7 +47,7 @@ box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);    }
       padding: 15px;
       border-radius: 5px;
       display: none; /* Oculto por defecto */
-      box-shadow: drow-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .container-circle:hover .menu {
