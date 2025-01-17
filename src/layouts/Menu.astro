@@ -1,6 +1,6 @@
 ---
 import Components from "./Components.astro";
-const  PlusIcon = "../assets/plus.svg";
+const PlusIcon = "/public/plus.svg";
 ---
 
 <html lang="en">
@@ -11,47 +11,19 @@ const  PlusIcon = "../assets/plus.svg";
     <title>Horario-Scheduler</title>
   </head>
   <div class="contenedor-menu">
-    <div class="container-circle">
-      <div class="menu">
-        <Components icon={(PlusIcon)}>Home</Components>
-        <Components icon={(PlusIcon)}>Settings</Components>
-        <Components icon="❓">Help</Components>
-      </div>
-    </div>
+    <Components icon={PlusIcon}>Home</Components>
   </div>
 
   <style>
     .contenedor-menu {
       width: 4%;
       height: 450px;
-      justify-content: center;
-      background-color: rgb(82, 190, 190);
+      background-color: rgb(47, 96, 96);
       float: right;
       border-radius: 15px;
       margin: 2%;
       box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
-    }
-
-    .container-circle {
-      position: relative;
-      display: inline-block;
-      float: right;
-      background-color: white;
-    }
-
-    .menu {
-      position: absolute;
-      top: 0;
-      right: 100%;
-      background-color: #e0e0e0;
-      padding: 15px;
-      border-radius: 5px;
-      display: none; /* Oculto por defecto */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .container-circle:hover .menu {
-      display: block; /* Mostrar menú al hacer hover */
+      display: flex;
     }
   </style>
 
