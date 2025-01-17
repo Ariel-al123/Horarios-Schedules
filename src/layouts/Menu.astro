@@ -1,6 +1,7 @@
 ---
 import Components from "./Components.astro";
 const PlusIcon = "/public/plus.svg";
+const PadLock_Lock = "/public/padlock-lock.svg";
 ---
 
 <html lang="en">
@@ -11,7 +12,9 @@ const PlusIcon = "/public/plus.svg";
     <title>Horario-Scheduler</title>
   </head>
   <div class="contenedor-menu">
-    <Components icon={PlusIcon}>Home</Components>
+    <Components icon={PlusIcon} />
+    <Components icon={PadLock_Lock} />
+    <Components icon={PlusIcon} />
   </div>
 
   <style>
@@ -23,7 +26,15 @@ const PlusIcon = "/public/plus.svg";
       border-radius: 15px;
       margin: 2%;
       box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
-      display: flex;
+    }
+
+    .contenedor-menu {
+      /* Cambios para centrar y apilar elementos */
+      display: flex; /* Activamos Flexbox */
+      flex-direction: column; /* Apilamos los elementos hacia abajo */
+      align-items: center; /* Centra los elementos horizontalmente */
+      overflow: hidden; /* Corta cualquier contenido que se desborde */
+      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
     }
   </style>
 
