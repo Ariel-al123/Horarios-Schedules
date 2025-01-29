@@ -2,41 +2,140 @@
 import Components from "./Components.astro";
 const PlusIcon = "/public/plus.svg";
 const PadLock_Lock = "/public/padlock-lock.svg";
+const { icon, class: className } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="sp">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Horario-Scheduler</title>
   </head>
-  <div class="contenedor-menu">
-    <Components icon={PlusIcon} />
-    <Components icon={PadLock_Lock} />
-    <Components icon={PlusIcon} />
-  </div>
+  <body>
 
-  <style>
-    .contenedor-menu {
-      width: 4%;
-      height: 450px;
-      background-color: rgb(47, 96, 96);
-      float: right;
-      border-radius: 15px;
-      margin: 2%;
-      box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
-    }
+    <div class="wrapper">
+      <div class="menu-plus-wrapper">
+        <div class="contenedor-plus-menu">
+          <div class="plus-item">
+            <div class="icon">Grupo</div>
+            <hr />
+            <div class="icon">Maestro</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    .contenedor-menu {
-      /* Cambios para centrar y apilar elementos */
-      display: flex; /* Activamos Flexbox */
-      flex-direction: column; /* Apilamos los elementos hacia abajo */
-      align-items: center; /* Centra los elementos horizontalmente */
-      overflow: hidden; /* Corta cualquier contenido que se desborde */
-      white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    }
-  </style>
+    <div class="contenedor-menu">
+      <!-- Contenedor para el menú desplegable -->
+      <Components class="Plus" icon={PlusIcon} />
+      <!-- Otros componentes -->
+      <Components icon={PadLock_Lock} />
+      <Components icon={PlusIcon} />
+    </div>
 
+    <style>
+      /* Estilos CSS... */
+      .wrapper {
+        width: 80%;
+        height: 1%;
+        background-color: red;
+      }
+      .menu-plus-wrapper {
+        width: 115%;
+        float: inline-start;
+      }
+      .contenedor-menu {
+        width: 4%;
+        height: 450px;
+        background-color: rgb(47, 96, 96);
+        float: right;
+        border-radius: 15px;
+        margin: 2%;
+        box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+      .contenedor-plus-menu {
+        display: none;
+        margin-right: 15px;
+        z-index: 1000;
+        width: 90px;
+        background-color: rgb(173, 173, 173);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 8px;
+        float: inline-end;
+      }
+      .contenedor-plus-menu.active {
+        display: block; /* Mostrar cuando se agregue la clase active */
+      }
+      .plus-item {
+        display: flex;
+        flex-direction: column;
+      }
+      hr {
+        margin: 5px 0;
+        border: 1px solid #ffffff;
+      }
+      .icon {
+        cursor: pointer;
+        font-size: 15px;
+      }
+    </style>
+    
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM cargado"); // Verifica que el DOM esté listo
 
+        const plusIcon = document.querySelector(".Plus");
+        const menu = document.querySelector(".contenedor-plus-menu");
+
+        if (!plusIcon || !menu) {
+          console.error(
+            "No se encontraron los elementos Plus o contenedor-plus-menu."
+          );
+          return;
+        }
+
+        // Alternar visibilidad del menú al hacer clic
+        plusIcon.addEventListener("click", (event) => {
+          event.stopPropagation(); // Evitar propagación del evento
+          console.log("Click en Plus Icon"); // Verifica que el evento se esté ejecutando
+          menu.classList.toggle("active"); // Mostrar/ocultar el menú
+        });
+
+        // Cerrar el menú al hacer clic fuera de él
+        document.addEventListener("click", (event) => {
+          if (menu.contains(event.target) && plusIcon.contains(event.target)) {
+            console.log("Clic fuera del menú"); // Verifica que el evento se esté ejecutando
+            menu.classList.remove("active"); // Ocultar el menú
+          }
+        });
+
+        
+
+        // Mostrar el menú al hacer hover
+        plusIcon.addEventListener("mouseenter", () => {
+          console.log("Mouse enter en Plus Icon"); // Verifica que el evento se esté ejecutando
+          menu.classList.add("active");
+        });
+/*
+        // Ocultar el menú al quitar el hover
+        plusIcon.addEventListener("mouseleave", () => {
+          console.log("Mouse leave en Plus Icon"); // Verifica que el evento se esté ejecutando
+          menu.classList.remove("active");
+        });
+  */
+        // Ocultar el menú si se mueve el mouse fuera del menú
+        menu.addEventListener("mouseleave", () => {
+          console.log("Mouse leave en el menú"); // Verifica que el evento se esté ejecutando
+          menu.classList.remove("active");
+        });
+      
+      });
+    </script>
+  </body>
 </html>
