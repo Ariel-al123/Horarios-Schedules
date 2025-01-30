@@ -1,0 +1,59 @@
+/* Contenedor para el menú desplegable */
+.wrapper {
+  width: 80%;
+  height: 1%;
+  background-color: rgba(255, 0, 0, 0);
+}
+.menu-plus-wrapper {
+  width: 115%;
+  float: inline-start;
+}
+
+.contenedor-plus-menu {
+    /* Ocultar por defecto */
+  display: none;
+  margin-right: 15px;
+  z-index: 1000;
+  width: 90px;
+  background-color: rgb(173, 173, 173);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  float: inline-end;
+}
+
+.contenedor-plus-menu.active {
+  /* Mostrar cuando se agregue la clase active */
+  display: block; 
+}
+
+.plus-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 15px;
+}
+
+hr {
+  margin: 5px 0;
+  border: 1px solid #ffffff;
+}
+
+/* Menu de opcciones */
+.contenedor-menu {
+  width: 4%;
+  height: 450px;
+  background-color: rgb(47, 96, 96);
+  float: right;
+  border-radius: 15px;
+  margin: 2%;
+  box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
