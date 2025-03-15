@@ -1,0 +1,50 @@
+---
+import Data from "../../public/JS/ClassData.js";
+import Background from "../layouts/Background.astro";
+const { title } = Astro.props;
+const { icon, class: className } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <script src="/public/JS/CreateTeacher.js" type="module"></script>
+    <script src="../../public/JS/ClassData.js" type="module"></script>
+    
+</head>
+  <body>
+    <Background />
+    <form method="POST" action="" id="Form">
+      <h4>Nombre del Maestro</h4>
+      <input type="text" placeholder="Nombre del Maestro" id="NameTeacher" />
+      <h4>Materia</h4>
+      <div>
+        <!-- Carrucel de Materia en Modo Basico -->
+      </div>
+      <input type="submit" name="insert" value="Guardar" id="BtnSave" />
+    </form>
+
+    <div class="Archivo-Guardado">Archivo Guardado</div>
+    <div class="Archivo-No-Guardado">No Guardado</div>
+    <style>
+      form {
+        position: absolute;
+      }
+
+      .Archivo-Guardado {
+        display: none;
+      }
+      .Archivo-No-Guardado {
+        display: none;
+      }
+    </style>
+
+    
+  </body>
+</html>
+
+

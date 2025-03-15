@@ -1,8 +1,11 @@
 ---
 import Components from "./Components.astro";
+const Crear = "/public/Crear.astro";
 const PlusIcon = "/public/plus.svg";
 const PadLock_Lock = "/public/padlock-lock.svg";
 const { icon, class: className } = Astro.props;
+const { title } = Astro.props;
+
 ---
 
 <html lang="sp">
@@ -11,23 +14,35 @@ const { icon, class: className } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="stylesheet" href="/public/CSS/Menu.css" />
-    <script src="/public/JS/Menu.js" type="module"></script>
-
+    <script src="../public/JS/Menu.js" type="module"></script>
   </head>
   <body>
-
     <!-- Contenedor para el menú desplegable -->
     <div class="wrapper">
       <div class="menu-plus-wrapper">
         <div class="contenedor-plus-menu">
           <div class="plus-item">
-            <div class="icon">Grupo</div>
-            <hr />
-            <div class="icon">Maestro</div>
+
+            <div class="icon">
+              <a href="/CreateTeacher" class="CreateTeacher">Maestro</a>
+            </div>
+            <div class="ampersand">&</div>
+            
+            <div class="icon" id="grupo">
+              <a href="">Grupo</a>
+            </div>
+            
+            <hr class="separador"/>
+
+            <div class="icon" >
+              <a href="/CreateSubjects" class="CreateSubjects">Materia</a>
+            
+            </div>
           </div>
         </div>
       </div>
     </div>
+    
 
     <!-- Menu de opciones -->
     <div class="contenedor-menu">
@@ -35,6 +50,5 @@ const { icon, class: className } = Astro.props;
       <Components icon={PadLock_Lock} />
       <Components icon={PlusIcon} />
     </div>
-    
   </body>
 </html>

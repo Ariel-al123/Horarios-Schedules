@@ -1,4 +1,9 @@
-/* Contenedor para el menú desplegable */
+:root{
+  --color-menu: #f4f1f5 opacity: 0.35;
+  
+}
+
+/* ---------------- Contenedor para el menú desplegable ------------------- */
 .wrapper {
   width: 80%;
   height: 1%;
@@ -7,19 +12,25 @@
 .menu-plus-wrapper {
   width: 115%;
   float: inline-start;
+  
 }
 
 .contenedor-plus-menu {
     /* Ocultar por defecto */
   display: none;
+  position: relative;
   margin-right: 15px;
   z-index: 1000;
-  width: 90px;
-  background-color: rgb(173, 173, 173);
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 150px;
+  height: auto;
+  background-color: var(---menu);
+  box-shadow: 1px 5px 6px 0px rgba(164, 164, 196, 0.75);
+  border-radius: 15px;
   padding: 8px;
   float: inline-end;
+  justify-content: center; 
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .contenedor-plus-menu.active {
@@ -30,30 +41,61 @@
 .plus-item {
   display: flex;
   flex-direction: column;
+  align-items: center; 
+  justify-content: left; 
+  text-align: center;
+  width: 80%;
+  margin: 3px 0;
 }
 
 .icon {
   cursor: pointer;
   font-size: 15px;
+  float: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: lighter;
+ 
+}
+
+.icon a {
+  text-decoration: none; 
+  color: black;          
+}
+
+#grupo{
+  margin-left: 6px;
+}
+
+.ampersand{
+  margin-left: 30%;
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-weight: lighter;
 }
 
 hr {
-  margin: 5px 0;
+  width: 110%;
+  border: 0;
+  margin-left: 10%;
   border: 1px solid #ffffff;
 }
 
-/* Menu de opcciones */
+
+/* ---------------- Menu de opcciones ---------------- */
 .contenedor-menu {
   width: 4%;
   height: 450px;
-  background-color: rgb(47, 96, 96);
+  background-color: var(--color-menu);
   float: right;
   border-radius: 15px;
   margin: 2%;
-  box-shadow: 1px 5px 6px 0px rgba(59, 59, 59, 0.75);
+  box-shadow: 1px 5px 6px 0px rgba(161, 161, 176, 0.75);
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   position: relative;
 }
+

@@ -1,0 +1,48 @@
+---
+import Menu from "../layouts/Menu.astro";
+---
+
+<html lang="sp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+  </head>
+  <body>
+    <form method="post" action="">
+      <h4>Nombre de la Materia</h4>
+      <select name="Nombre de la materia">
+        <option value="value1">Value 1</option>
+        <option value="value2" selected>Value 2</option>
+        <option value="value3">Value 3</option>
+      </select>
+
+      <h4>Nombre del Maestro</h4>
+      <select name="select">
+        <option value="value1">Value 1</option>
+        <option value="value2" selected>Value 2</option>
+        <option value="value3">Value 3</option>
+      </select>
+
+      <h4>Cantidad de Horas</h4>
+      <input type="number" placeholder="Cantidad de Horas" />
+
+      <h4>Grupos a la que se le impartira</h4>
+      <div>
+        <!-- Carrucel -->
+      </div>
+
+      <h4>Cansacion</h4>
+      <input type="number" placeholder="3" />
+
+      <!-- Validar si un nombre de la materia es igual -->
+      <!-- Validar si un grupo ya tiene una materia con el mismo nombre -->
+      <!-- Validar si una materia se matricula en un grado superior del mismo grupo
+           ejemplo: 1A y 2A no pueden tener la misma materia pero 1A y 1B si --> 
+      <!-- Se pueden escoger varios maestros para una misma materia -->
+           
+       <input type="submit" name="insert" value="Guardar" class="boton">
+    </form>
+  </body>
+</html>

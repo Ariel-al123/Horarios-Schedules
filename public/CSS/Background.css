@@ -1,0 +1,53 @@
+:root {
+    --color-light-index: #f4f1f5;
+    --blue-circle: #d0eefe;
+    --yellow-circle: #f7e9b7;
+    --rose-circle: #f7d9e1;
+  }
+  
+body {
+  width: 100%;
+  height: 100%;
+  background: var(--color-light-index);
+}
+
+
+.circle-blue {
+  width: 48%;
+  height: 96%;
+  position: absolute;
+  top: 5%;
+  background: radial-gradient(
+    circle,
+    var(--blue-circle) 0%,
+    var(--color-light-index) 100%
+  );
+  shape-outside: circle(70% at 60% 120%);
+  clip-path: circle(70% at 50% 140%);
+}
+
+
+.container-yellow{
+  width: 30%;
+  height: 30%;
+  display: flex;
+  position: absolute;
+  top: 69%;
+  left: 65%;
+}
+
+.circle-yellow {
+  width: 45%;
+  height: 90%;
+  top: 10%;
+  left: 25%;
+  position: relative;
+  background: radial-gradient(
+    circle,
+    var(--yellow-circle) 0%,
+    var(--color-light-index) 100%
+  );
+  clip-path: circle();
+  /* Alinea el circulo en el centro */
+
+}
