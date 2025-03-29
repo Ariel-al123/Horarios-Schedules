@@ -1,61 +1,59 @@
 import Data from "../JS/ClassData.js";
-import path from "path";
 
 // Inicialización de la clase Data (si es necesaria)
-let ClassData = new Data(
-  null,
-  null,
-  "#NameTeacher",
-  null,
-  null,
-  "#BtnSave",
-  "#Form"
-);
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#Form");
+  const input = document.querySelector("#NameTeacher");
+  const button = document.querySelector("#BtnSave");
 
-// Selección de elementos del DOM
-const form = document.querySelector("#Form"); // Corregido: Definir la variable 'form'
-const input = document.querySelector("#NameTeacher");
-const button = document.querySelector("#BtnSave");
+  const successMessage = document.querySelector(".Archivo-Guardado");
+  const errorMessage = document.querySelector(".Archivo-No-Guardado");
+  const materia = "Ingles";
 
-// Función para actualizar el estado del botón
-const ActualizarBoton = () => {
-  button.disabled = input.value.trim() === "";
-};
+  let ClassData = new Data(
+    null,
+    materia,
+    input,
+    null,
+    null,
+    button,
+    null
+  );
 
+  // Función para actualizar el estado del botón
+  const ActualizarBoton = () => {
+    button.disabled = input.value.trim() === "";
+  };
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const teacherName = input.value.trim();
+  // Ejecutar la función al cargar la página para asegurar que el botón inicie deshabilitado
+  ActualizarBoton();
 
-  if (teacherName) {
+  // Evento para actualizar el botón cuando el valor del input cambia
+  input.addEventListener("input", ActualizarBoton);
+
+  // Función para guardar y mostrar mensajes
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch('../../src/pages/api/save-teacher.js', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: teacherName,
-          subjects: 'Matemáticas',
-         }),
-      });
-
-      if (response.ok) {
-        console.log('Maestro guardado exitosamente');
-        input.value = ''; // Limpiar el campo
-      } else {
-        console.error('Error al guardar el maestro');
-      }
+      await ClassData.SaveTeacher(input.value, materia);
+      setTimeout(() => {
+        successMessage.style.display = "block";
+      }, 200); // Muestra el mensaje 
+      console.log("Se guardó");
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 1300); // Ocultar el mensaje
     } catch (error) {
-      console.error('Error:', error);
+      setTimeout(() => {
+        errorMessage.style.display = "block";
+      }, 200);
+      console.log("No se guardó");
+      setTimeout(() => {
+        errorMessage.style.display = "none";
+      }, 1300); // Ocultar el mensaje
     }
-  } else {
-    alert('Por favor ingresa un nombre');
-  }
+
+    e.target.reset();
+    ActualizarBoton(); // Asegurar que el botón se deshabilite después de enviar el formulario
+  });
 });
-
-// Ejecutar la función al cargar la página para asegurar que el botón inicie deshabilitado
-ActualizarBoton();
-
-// Evento para actualizar el botón cuando el valor del input cambia
-input.addEventListener("input", ActualizarBoton);

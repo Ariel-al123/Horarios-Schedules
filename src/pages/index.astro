@@ -1,7 +1,5 @@
 ---
 import Menu from "../layouts/Menu.astro";
-import CreateTeacher from "CreateTeacher.astro";
-import Background from "../layouts/Background.astro";
 const { title } = Astro.props;
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -13,14 +11,36 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="../public/CSS/index.css" />
     <link rel="shortcut icon" href="../../public/plus.svg" />
   </head>
   <body>
+    <script>
+      /*
+      // Guardar datos de ejemplo
+      const user1 = { username: "Maria", email: "maria@mail.com" };
+      const user2 = { username: "Pedro", email: "pedro@mail.com" };
 
-   <Background />
-   <Menu />
-    
+      localStorage.setItem("user", JSON.stringify(user1));
+      localStorage.setItem("user_profile", JSON.stringify(user2)); // Esta no se incluirá
+      localStorage.setItem("config", "dark-mode"); // Esta tampoco
+
+      // Obtener SOLO la clave 'user'
+      const userData = JSON.parse(localStorage.getItem("user"));
+      console.log("Usuario específico:", userData); // { username: "Maria", ... }
+
+      // Obtener TODAS las claves que contengan 'user' (ej: 'user', 'user-123')
+      const allUserKeys = Object.keys(localStorage).filter((key) =>
+        key.includes("user")
+      );
+      const allUsers = allUserKeys.map((key) =>
+        JSON.parse(localStorage.getItem(key))
+      );
+
+      console.log("Todos los usuarios:", allUsers); // [ {username: "Maria"}, {username: "Pedro"} ]
+      //localStorage.removeItem("user");
+    */
+
+    </script>
+    <Menu />
   </body>
 </html>
-

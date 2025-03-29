@@ -1,5 +1,6 @@
 ---
 import Components from "./Components.astro";
+import Background from "./Background.astro";
 const Crear = "/public/Crear.astro";
 const PlusIcon = "/public/plus.svg";
 const PadLock_Lock = "/public/padlock-lock.svg";
@@ -17,6 +18,8 @@ const { title } = Astro.props;
     <script src="../public/JS/Menu.js" type="module"></script>
   </head>
   <body>
+
+
     <!-- Contenedor para el menú desplegable -->
     <div class="wrapper">
       <div class="menu-plus-wrapper">
@@ -50,5 +53,7 @@ const { title } = Astro.props;
       <Components icon={PadLock_Lock} />
       <Components icon={PlusIcon} />
     </div>
+
+    <Background>
   </body>
 </html>

@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Verifica que el DOM esté listo
-  console.log("DOM cargado");
-
   // Obtener elementos del DOM
   const plusIcon = document.querySelector(".Plus");
   const menu = document.querySelector(".contenedor-plus-menu");

@@ -1,8 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-// Ruta al archivo JSON
-
 export default class Data {
   Id;
   NameSubject;
@@ -22,8 +20,8 @@ export default class Data {
     this.Form = Form;
   }
 
-  MakeId() {
-    return `${this.NameSubject}.${this.Teacher}`;
+   MakeId(NameSubject, Teacher) {
+    return `${NameSubject}.${Teacher}`;
   }
 
   // Funciones para guardar y obtener datos de Subjects
@@ -36,66 +34,18 @@ export default class Data {
 
   GetTeacher() {}
 
+  SaveTeacher(Teacher, NameSubject) {
+    //Creamos un Id de la materia
+    const Id_Subject = this.MakeId(NameSubject, Teacher);
 
-
-  VerificarArchivo(){
-    const filePath = path.join(__dirname, '../../src/data', 'teachers.json');
-
-    // Verificar permisos de escritura
-    fs.access(filePath, fs.constants.W_OK, (err) => {
-      if (err) {
-        console.log('No tienes permisos de escritura en el archivo. Intentando otorgarlos...');
-        
-        // Intentar otorgar permisos de escritura (lectura y escritura para el usuario, grupo y otros)
-        fs.chmod(filePath, 0o666, (chmodErr) => {
-          if (chmodErr) {
-            console.error('Error al cambiar los permisos:', chmodErr);
-          } else {
-            console.log('Permisos modificados correctamente. Ahora puedes escribir en el archivo.');
-          }
-        });
-      } else {
-        console.log('El archivo tiene permisos de escritura.');
-      }
-    });
-  }
-
-  SaveTeacher(Teacher) {
-    // Se arma la ruta completa al archivo teachers.json
-    const teachersFilePath = path.join(
-      __dirname,
-      "../../src/data",
-      "teachers.json"
-    );
-    let teachersData = [];
-
-    // Si el archivo existe, lo leemos y parseamos
-    if (fs.existsSync(teachersFilePath)) {
-      const data = fs.readFileSync(teachersFilePath, "UTF-8");
-      try {
-        teachersData = JSON.parse(data);
-      } catch (error) {
-        console.error("Error al parsear el JSON:", error);
-      }
-    }
-
-    // Creamos el objeto del nuevo maestro. Aquí puedes agregar más campos si es necesario.
-    const newTeacher = {
-      name: teacherName,
-      subjects: "Matemáticas", // Puedes modificar o eliminar este campo según tus necesidades
+    // Creamos el objeto del nuevo maestro.
+    const DataTeacher = {
+      Name: Teacher,
+      Subjects: NameSubject
     };
 
-    // Se agrega el nuevo maestro al array
-    teachersData.push(newTeacher);
-
-    // Se escribe el nuevo array en el archivo JSON con una identación de 4 espacios
-    fs.writeFileSync(
-      teachersFilePath,
-      JSON.stringify(teachersData, null, 4),
-      "UTF-8"
-    );
-    console.log("Maestro guardado exitosamente.");
-   // document.querySelector("#Archivo-Guardado").value = block;
+    // Se agrega el nuevo maestro local storage
+    localStorage.setItem(Id_Subject, JSON.stringify(DataTeacher));
   }
 
   ClearJson() {}

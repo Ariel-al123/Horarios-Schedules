@@ -7,7 +7,8 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const TEACHERS_PATH = path.join(__dirname, '../../src/data/teachers.json');
+// Corregir la ruta hacia el archivo teachers.json
+const TEACHERS_PATH = path.join(__dirname, '../../../src/data/teachers.json');
 const JSON_HEADERS = { 'Content-Type': 'application/json' };
 
 // Función para validar si el nombre es válido
@@ -23,50 +24,94 @@ function validateName(name) {
 
 // Función para leer o inicializar el archivo JSON
 function readTeachersFile(filePath) {
-  if (fs.existsSync(filePath)) {
-    const teachersData = fs.readFileSync(filePath, 'UTF-8');
-    return JSON.parse(teachersData);
+  try {
+    // Asegurarse de que el directorio exista
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    
+    if (fs.existsSync(filePath)) {
+      const teachersData = fs.readFileSync(filePath, 'UTF-8');
+      // Si el archivo está vacío, inicializar con un array vacío
+      if (teachersData.trim() === '') {
+        return [];
+      }
+      return JSON.parse(teachersData);
+    }
+    
+    // Si el archivo no existe, crear un archivo vacío con un array
+    fs.writeFileSync(filePath, JSON.stringify([], null, 2));
+    return [];
+  } catch (error) {
+    console.error('Error al leer o inicializar el archivo:', error);
+    return [];
   }
-  return [];
 }
 
 // Función para guardar en el archivo JSON
 function saveTeachersFile(filePath, teachers) {
-  fs.writeFileSync(filePath, JSON.stringify(teachers, null, 2));
+  try {
+    fs.writeFileSync(filePath, JSON.stringify(teachers, null, 2));
+    return true;
+  } catch (error) {
+    console.error('Error al guardar el archivo:', error);
+    return false;
+  }
 }
 
 // Función principal POST refactorizada
 export async function post({ request }) {
-  const { name } = await request.json();
+  try {
+    const body = await request.json();
+    const { name, subjects } = body;
 
-  // Imprime la ruta del archivo
-  console.log('Ruta del archivo Teachers:', TEACHERS_PATH);
+    // Imprime la ruta del archivo
+    console.log('Ruta del archivo Teachers:', TEACHERS_PATH);
 
-  const validationError = validateName(name);
-  if (validationError) return validationError;
+    const validationError = validateName(name);
+    if (validationError) return validationError;
 
-  const teachers = readTeachersFile(TEACHERS_PATH);
-  const newTeacher = { name };
-  teachers.push(newTeacher);
+    // Leer los datos actuales
+    const teachers = readTeachersFile(TEACHERS_PATH);
+    
+    // Crear nuevo profesor con ID único
+    const newTeacher = { 
+      id: Date.now().toString(),
+      name,
+      subjects: subjects || []
+    };
+    
+    teachers.push(newTeacher);
+    console.log('Datos a guardar:', teachers);
 
-  console.log('Datos a guardar:', teachers); // Verifica los datos que serán guardados
+    // Guardar los cambios
+    const success = saveTeachersFile(TEACHERS_PATH, teachers);
+    
+    if (!success) {
+      return new Response(JSON.stringify({ error: 'Error al guardar el archivo' }), {
+        status: 500,
+        headers: JSON_HEADERS,
+      });
+    }
 
-  saveTeachersFile(TEACHERS_PATH, teachers);
+    // Verificar datos guardados
+    const savedTeachers = readTeachersFile(TEACHERS_PATH);
+    console.log('Datos en el archivo después de guardar:', savedTeachers);
 
-  // Verifica los datos guardados al leer el archivo nuevamente
-  const savedTeachers = readTeachersFile(TEACHERS_PATH);
-  console.log('Datos en el archivo después de guardar:', savedTeachers);
-
-  return new Response(JSON.stringify({ success: true }), {
-    status: 200,
-    headers: JSON_HEADERS,
-  });
-}
-
-// Ejemplo de uso para garantizar que la función 'post' se utiliza
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const mockRequest = {
-    json: async () => ({ name: 'New Teacher' }),
-  };
-  post({ request: mockRequest }).then(console.log);
+    return new Response(JSON.stringify({ 
+      success: true,
+      message: 'Maestro guardado correctamente',
+      teacher: newTeacher 
+    }), {
+      status: 200,
+      headers: JSON_HEADERS,
+    });
+  } catch (error) {
+    console.error('Error en el endpoint:', error);
+    return new Response(JSON.stringify({ error: 'Error interno del servidor' }), {
+      status: 500,
+      headers: JSON_HEADERS,
+    });
+  }
 }

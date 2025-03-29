@@ -1,50 +1,58 @@
 ---
-import Data from "../../public/JS/ClassData.js";
-import Background from "../layouts/Background.astro";
+import fs from 'fs/promises';
+import path from 'path';
+import teachers from '../data/teachers.json';
+import Menu from '../layouts/Menu.astro';
 const { title } = Astro.props;
-const { icon, class: className } = Astro.props;
 ---
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    
-    <script src="/public/JS/CreateTeacher.js" type="module"></script>
-    <script src="../../public/JS/ClassData.js" type="module"></script>
-    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../../public/JS/CreateTeacher.js"></script>
 </head>
-  <body>
-    <Background />
-    <form method="POST" action="" id="Form">
-      <h4>Nombre del Maestro</h4>
-      <input type="text" placeholder="Nombre del Maestro" id="NameTeacher" />
-      <h4>Materia</h4>
-      <div>
-        <!-- Carrucel de Materia en Modo Basico -->
+<body>
+  
+   
+  <form method="POST" id="Form">
+    <div class="form-group">
+      <label id="name">Nombre:</label>
+      <input type="text" id="NameTeacher" name="name">
+    </div>
+  
+    <div class="form-group">
+      <label id="Materia">Materias:</label>
+      <div class="subjects-container">
+        <div class="subject-option">
+          <label id=>Materias</label>
+          <input type="checkbox" name="subject" value="Matematicas">Matematicas
+          
+        </div>
+        <!-- Mantener otras materias existentes -->
       </div>
-      <input type="submit" name="insert" value="Guardar" id="BtnSave" />
-    </form>
+    </div>
+  
+    <button type="submit" id="BtnSave">Guardar</button>
+  </form>
 
-    <div class="Archivo-Guardado">Archivo Guardado</div>
-    <div class="Archivo-No-Guardado">No Guardado</div>
-    <style>
-      form {
-        position: absolute;
-      }
+  <div class="Archivo-Guardado">Archivo Guardado</div>
+  <div class="Archivo-No-Guardado">Archivo No Guardado</div>
 
-      .Archivo-Guardado {
-        display: none;
-      }
-      .Archivo-No-Guardado {
-        display: none;
-      }
-    </style>
+  <style>
+    .Archivo-Guardado, .Archivo-No-Guardado{
+      display: none;
+    }
 
-    
-  </body>
+    .Archivo-Guardado{
+      color: green;
+    }
+    .Archivo-No-Guardado{
+      color: red;
+    }
+  </style>
+  <Menu>
+</body>
 </html>
 
 
